@@ -1,8 +1,0 @@
-﻿Build started...
-1>------ Build started: Project: Models, Configuration: Debug Any CPU ------
-1>  Models -> C:\Users\vsistema\Documents\GitHub\ModuloConfiguracao\Configuracao\Models\bin\Debug\Models.dll
-2>------ Build started: Project: DAL, Configuration: Debug Any CPU ------
-2>  DAL -> C:\Users\vsistema\Documents\GitHub\ModuloConfiguracao\Configuracao\DAL\bin\Debug\DAL.dll
-3>------ Build started: Project: BLL, Configuration: Debug Any CPU ------
-3>  BLL -> C:\Users\vsistema\Documents\GitHub\ModuloConfiguracao\Configuracao\BLL\bin\Debug\BLL.dll
-========== Build: 3 succeeded, 0 failed, 1 up-to-date, 0 skipped ==========
