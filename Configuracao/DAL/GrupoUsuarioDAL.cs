@@ -17,6 +17,11 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+        public List<GrupoUsuario> BuscarPorId(int Id)
+        {
+            throw new NotImplementedException();
+        }
         public List<GrupoUsuario> BuscarPorNomeGrupo(string _nomeGrupoUsuario)
         {
             throw new NotImplementedException();
