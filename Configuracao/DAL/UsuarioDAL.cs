@@ -36,25 +36,64 @@ namespace DAL
                 cn.Close();
             }
         }
-        public List<Usuário> BuscarTodos()
+        public void BuscarTodos()
         {
             throw new NotImplementedException();
         }
-        public List<Usuário> BuscarPorNomeUsuario(string _nomeUsuario)
+        public void BuscarPorNomeUsuario(string _nomeUsuario)
         {
             throw new NotImplementedException();
         }
-        public List<Usuário> BuscarPorId(int _id)
+        public void BuscarPorId(int _id)
         {
             throw new NotImplementedException();
         }
-        public List<Usuário> Alterar(Usuário usuário)
+        public void Alterar(Usuário _usuário)
         {
-            throw new NotImplementedException();    
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"UPDATE INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Nome", _usuário.Nome);
+                cmd.Parameters.AddWithValue("@NomeUsuario", _usuário.NomeUsuario);
+                cmd.Parameters.AddWithValue("@Email", _usuário.Email);
+                cmd.Parameters.AddWithValue("@CPF", _usuário.CPF);
+                cmd.Parameters.AddWithValue("@Ativo", _usuário.Ativo);
+                cmd.Parameters.AddWithValue("@Senha", _usuário.Senha);
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao Alterar um usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
-        public List<Usuário> Excluir(int Id)
+        public void  Excluir(int _id)
         {
-            throw new NotImplementedException();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Usuario WHERE ID = @Id";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id",_id);
+                
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao inserir um usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
     }
 }
