@@ -10,28 +10,47 @@ namespace DAL
 {
     public class GrupoUsuarioDAL
     {
-        public void Inserir(GrupoUsuario grupoUsuario)
+        public void Inserir(GrupoUsuario _grupoUsuario)
         {
-    
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"INSERT INTO GrupoUsuario(Id,NomeGrupo,) Values(@Id , @NomeGrupo";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Nome", _grupoUsuario.Id);
+                cmd.Parameters.AddWithValue("@NomeUsuario", _grupoUsuario.NomeGrupo);
+              
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao inserir um Grupo no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
-        public List<GrupoUsuario> BuscarTodos()
+        public void BuscarTodos()
         {
             throw new NotImplementedException();
         }
 
-        public List<GrupoUsuario> BuscarPorId(int Id)
+        public void BuscarPorId(int Id)
         {
             throw new NotImplementedException();
         }
-        public List<GrupoUsuario> BuscarPorNomeGrupo(string _nomeGrupoUsuario)
+        public void BuscarPorNomeGrupo(string _nomeGrupoUsuario)
         {
             throw new NotImplementedException();
         }
-        public List<GrupoUsuario> Alterar(GrupoUsuario grupoUsuario)
+        public void Alterar(GrupoUsuario grupoUsuario)
         {
             throw new NotImplementedException();
         }
-        public List<GrupoUsuario> Excluir(int Id)
+        public void Excluir(int Id)
         {
             throw new NotImplementedException();
         }

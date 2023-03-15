@@ -88,7 +88,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao inserir um usuário no banco de dados", ex);
+                throw new Exception($"Ocorreu um erro ao Excluir um usuário no banco de dados", ex);
             }
             finally
             {
