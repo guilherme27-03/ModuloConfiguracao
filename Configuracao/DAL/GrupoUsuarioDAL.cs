@@ -46,13 +46,50 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
-        public void Alterar(GrupoUsuario grupoUsuario)
+        public void Alterar(GrupoUsuario _grupoUsuario)
         {
-            throw new NotImplementedException();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"UPDATE INTO GrupoUsuario(Id,NomeGrupo,) Values(@Id , @NomeGrupo";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Nome", _grupoUsuario.Id);
+                cmd.Parameters.AddWithValue("@NomeUsuario", _grupoUsuario.NomeGrupo);
+
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao Alterar um Grupo no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
-        public void Excluir(int Id)
+        public void Excluir(int _id)
         {
-            throw new NotImplementedException();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @" DELETE FROM GrupoUsuario WHERE ID = @Id";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id", _id);
+
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao excluir um Grupo no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
     }
 }
