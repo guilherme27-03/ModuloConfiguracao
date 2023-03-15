@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace DAL
 {
     public class UsuarioDAL
     {
-        public void Inserir(Usuário usuário)
+        public void Inserir(Usuario usuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -19,36 +20,174 @@ namespace DAL
                 cmd.CommandText = @"INSERT INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha";
 
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Nome",usuário.Nome);
-                cmd.Parameters.AddWithValue("@NomeUsuario", usuário.NomeUsuario);
-                cmd.Parameters.AddWithValue("@Email", usuário.Email);
-                cmd.Parameters.AddWithValue("@CPF", usuário.CPF);
-                cmd.Parameters.AddWithValue("@Ativo", usuário.Ativo);
-                cmd.Parameters.AddWithValue("@Senha", usuário.Senha);
+                cmd.Parameters.AddWithValue("@Nome", usuario.Nome);
+                cmd.Parameters.AddWithValue("@NomeUsuario", usuario.NomeUsuario);
+                cmd.Parameters.AddWithValue("@Email", usuario.Email);
+                cmd.Parameters.AddWithValue("@CPF", usuario.CPF);
+                cmd.Parameters.AddWithValue("@Ativo", usuario.Ativo);
+                cmd.Parameters.AddWithValue("@Senha", usuario.Senha);
                 cmd.Connection = cn;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ocorreu um erro ao inserir um usuário no banco de dados",ex);
+                throw new Exception($"Ocorreu um erro ao inserir um usuário no banco de dados", ex);
             }
             finally
             {
                 cn.Close();
             }
         }
-        public void BuscarTodos()
+
+        public List<Usuario> BuscarPorNome()
         {
-            throw new NotImplementedException();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,Cpf,Ativo,Senha WHERE " ;
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        public List<Usuario> BuscarTodos()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario;
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE (@Id,@Nome,@NomeUsuario,@Email,@CPF,@Ativo,@Senha)";
+                cmd.CommandType= System.Data.CommandType.Text;
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while(rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["ID"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+                    }  
+                }
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar todos os usuarios no banco de dados",ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
         public void BuscarPorNomeUsuario(string _nomeUsuario)
         {
-            throw new NotImplementedException();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE NomeUsuario = @NomeUsuario";
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@NomeUsuario", _nomeUsuario);
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["ID"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar Nome de usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
         }
         public void BuscarPorId(int _id)
         {
-            throw new NotImplementedException();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE Id = @Id";
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id", _id);
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(rd["ID"]);
+                        usuario.Nome = rd["Nome"].ToString();
+                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
+                        usuario.Email = rd["Email"].ToString();
+                        usuario.CPF = rd["CPF"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuarios.Add(usuario);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar Id de usuario no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+            
+            
         }
-        public void Alterar(Usuário _usuário)
+        public void Alterar(Usuario _usuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -57,12 +196,12 @@ namespace DAL
                 cmd.CommandText = @"UPDATE INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha";
 
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Nome", _usuário.Nome);
-                cmd.Parameters.AddWithValue("@NomeUsuario", _usuário.NomeUsuario);
-                cmd.Parameters.AddWithValue("@Email", _usuário.Email);
-                cmd.Parameters.AddWithValue("@CPF", _usuário.CPF);
-                cmd.Parameters.AddWithValue("@Ativo", _usuário.Ativo);
-                cmd.Parameters.AddWithValue("@Senha", _usuário.Senha);
+                cmd.Parameters.AddWithValue("@Nome", _usuario.Nome);
+                cmd.Parameters.AddWithValue("@NomeUsuario", _usuario.NomeUsuario);
+                cmd.Parameters.AddWithValue("@Email", _usuario.Email);
+                cmd.Parameters.AddWithValue("@CPF", _usuario.CPF);
+                cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
+                cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
                 cmd.Connection = cn;
             }
             catch (Exception ex)
