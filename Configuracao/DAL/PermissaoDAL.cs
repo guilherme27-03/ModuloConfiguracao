@@ -138,7 +138,7 @@ namespace DAL
 
                     }
 
-
+                return permissao;
             }
             catch (Exception ex)
             {
@@ -148,14 +148,14 @@ namespace DAL
             {
                 cn.Close();
             }
-        } 
-        public Permissao Alterar(Permissao permissao)
+        }
+        public void Alterar(Permissao permissao)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha";
+                cmd.CommandText = @"UPDATE INTO Permissao(Id,Descricao) Values (@Id , @Descricao";
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", permissao.Id);
@@ -172,26 +172,27 @@ namespace DAL
                 cn.Close();
             }
         }
-    }
+
         public void Excluir(int _id)
         {
-        SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
-        try
-        {
-            SqlCommand cmd = cn.CreateCommand();
-            cmd.CommandText = "DELETE FROM Permissao WHERE ID = @Id";
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Parameters.AddWithValue("@Id", _id);
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Permissao WHERE ID = @Id";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id", _id);
 
-            cmd.Connection = cn;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Ocorreu um erro ao Excluir um usuário no banco de dados", ex);
-        }
-        finally
-        {
-            cn.Close();
+                cmd.Connection = cn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao Excluir um usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
     }
 }
