@@ -54,7 +54,7 @@ namespace DAL
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    if (rd.Read())
+                    while (rd.Read())
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(rd["ID"]);
@@ -71,7 +71,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar Id de usuario no banco de dados", ex);
+                throw new Exception("Ocorreu um erro ao tentar buscar Nome  no banco de dados", ex);
             }
             finally
             {
