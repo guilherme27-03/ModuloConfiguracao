@@ -122,7 +122,7 @@ namespace DAL
 
             }
         }
-        public void BuscarPorNomeUsuario(string _nomeUsuario)
+        public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             List<Usuario> usuarios = new List<Usuario>();
             Usuario usuario = new Usuario();
@@ -155,9 +155,8 @@ namespace DAL
                         usuarios.Add(usuario);
                     }
                 }
-
+                return usuario;
             }
-
             catch (Exception ex)
             {
                 throw new Exception("Ocorreu um erro ao tentar buscar Nome de usuário no banco de dados", ex);
@@ -166,11 +165,9 @@ namespace DAL
             {
                 cn.Close();
             }
-
         }
-        public void BuscarPorId(int _id)
+        public Usuario BuscarPorId(int _id)
         {
-            List<Usuario> usuarios = new List<Usuario>();
             Usuario usuario = new Usuario();
 
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
@@ -190,7 +187,6 @@ namespace DAL
                 {
                     if (rd.Read())
                     {
-                        usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(rd["ID"]);
                         usuario.Nome = rd["Nome"].ToString();
                         usuario.NomeUsuario = rd["NomeUsuario"].ToString();
@@ -198,10 +194,9 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        usuarios.Add(usuario);
                     }
                 }
-
+                return usuario;
             }
             catch (Exception ex)
             {
@@ -211,13 +206,9 @@ namespace DAL
             {
                 cn.Close();
             }
-
-
         }
-
-        public void BuscarPorCpf(string _cpf)
+        public Usuario BuscarPorCpf(string _cpf)
         {
-            List<Usuario> usuarios = new List<Usuario>();
             Usuario usuario = new Usuario();
 
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
@@ -244,8 +235,7 @@ namespace DAL
                         usuario.Email = rd["Email"].ToString();
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
-                        usuario.Senha = rd["Senha"].ToString();
-                        usuarios.Add(usuario);
+                        usuario.Senha = rd["Senha"].ToString();                   
                     }
                 }
 
@@ -259,6 +249,7 @@ namespace DAL
             {
                 cn.Close();
             }
+            return usuario;
 
         }
    
