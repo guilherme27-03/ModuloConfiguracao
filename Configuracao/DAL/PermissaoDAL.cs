@@ -82,7 +82,7 @@ namespace DAL
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandText = "SELECT Id,Descricao FROM Usuario WHERE Descricao LIKE @Descricao";
-                cmd.Parameters.AddWithValue("@Nome", "%" + _descricao + "%");
+                cmd.Parameters.AddWithValue("@Descricao", "%" + _descricao + "%");
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Descricao", _descricao);
