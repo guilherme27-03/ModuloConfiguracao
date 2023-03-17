@@ -8,18 +8,19 @@ namespace BLL
 {
     public class UsuarioBLL
     {
-        public void Inserir(Usuario usuario)
+        public void Inserir(Usuario _usuario)
         {
-            ValidarDados(usuario);
-            new UsuarioDAL().Inserir(usuario);
+            ValidarDados(_usuario);
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            usuarioDAL.Inserir(_usuario);
 
         }
 
-        public void Alterar(Usuario usuario)
+        public void Alterar(Usuario _usuario)
         {
-            ValidarDados(usuario);
+            ValidarDados(_usuario);
 
-            new UsuarioDAL().Alterar(usuario);
+            new UsuarioDAL().Alterar(_usuario);
         }
         public void Excluir(int _id)
         {

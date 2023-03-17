@@ -22,8 +22,9 @@ namespace DAL
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Nome", permissao.Id);
                 cmd.Parameters.AddWithValue("@NomeUsuario", permissao.Descricao);
-
                 cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -43,11 +44,11 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Descricao WHERE (@Id,@Descricao)";
+                cmd.CommandText = "SELECT Id,Descricao FROM Permissao";
                 cmd.CommandType = System.Data.CommandType.Text;
-
                 cn.Open();
-
+                cn.Close();
+                cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
@@ -183,8 +184,9 @@ namespace DAL
                 cmd.CommandText = "DELETE FROM Permissao WHERE ID = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _id);
-
                 cmd.Connection = cn;
+                cn.Close();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

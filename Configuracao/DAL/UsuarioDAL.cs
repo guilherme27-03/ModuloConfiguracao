@@ -11,22 +11,24 @@ namespace DAL
 {
     public class UsuarioDAL
     {
-        public void Inserir(Usuario usuario)
+        public void Inserir(Usuario _usuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"INSERT INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha";
+                cmd.CommandText = @"INSERT INTO Usuario(Nome,NomeUsuario,Email,CPF,Ativo,senha) Values(@Nome , @NomeUsuario,@Email,@CPF,@Ativo,@Senha)";
 
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Nome", usuario.Nome);
-                cmd.Parameters.AddWithValue("@NomeUsuario", usuario.NomeUsuario);
-                cmd.Parameters.AddWithValue("@Email", usuario.Email);
-                cmd.Parameters.AddWithValue("@CPF", usuario.CPF);
-                cmd.Parameters.AddWithValue("@Ativo", usuario.Ativo);
-                cmd.Parameters.AddWithValue("@Senha", usuario.Senha);
+                cmd.Parameters.AddWithValue("@Nome", _usuario.Nome);
+                cmd.Parameters.AddWithValue("@NomeUsuario", _usuario.NomeUsuario);
+                cmd.Parameters.AddWithValue("@Email", _usuario.Email);
+                cmd.Parameters.AddWithValue("@CPF", _usuario.CPF);
+                cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
+                cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
                 cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -89,11 +91,11 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE (@Id,@Nome,@NomeUsuario,@Email,@CPF,@Ativo,@Senha)";
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha FROM Usuario";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cn.Open();
-
+                cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
@@ -139,7 +141,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@NomeUsuario", _nomeUsuario);
 
                 cn.Open();
-
+                cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
@@ -182,7 +184,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Id", _id);
 
                 cn.Open();
-
+                cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
@@ -223,6 +225,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@CPF+.", _cpf);
 
                 cn.Open();
+                cmd.ExecuteNonQuery();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -252,9 +255,7 @@ namespace DAL
             return usuario;
 
         }
-   
-
-            public void Alterar(Usuario _usuario)
+        public void Alterar(Usuario _usuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -270,6 +271,8 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Ativo", _usuario.Ativo);
                 cmd.Parameters.AddWithValue("@Senha", _usuario.Senha);
                 cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -289,8 +292,9 @@ namespace DAL
                 cmd.CommandText = "DELETE FROM Usuario WHERE ID = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _id);
-
                 cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
