@@ -1,5 +1,8 @@
 ﻿
 using DAL;
+using Models;
+using System.Data.SqlClient;
+using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -7,9 +10,10 @@ namespace BLL
 {
     public class PermmissaoBLL
     {
-        public void Inserir()
+        public void Inserir(Permissao permissao)
         {
-
+            ValidarDados2(permissao);
+            new PermissaoDAL().Inserir(permissao);
         }
         public void Excluir(int _id)
         {
@@ -19,10 +23,24 @@ namespace BLL
         {
             new PermissaoDAL().BuscarTodos();
         }
+        public Permissao BuscarPorId(int id)
+        {
+            return new PermissaoDAL().BuscarPorId(id);
+        }
         public void BuscarPorDescricao(string _descricao)
         {
             new PermissaoDAL().BuscarPorDescricao(_descricao);
         }
+        public void Alterar(Permissao permissao)
+        {
+            ValidarDados2(permissao);
 
+            new PermissaoDAL().Alterar(permissao);
+        }
+        private void ValidarDados2(Permissao permissao)
+        {
+            if (permissao.Descricao.Length <= 10)
+                throw new System.Exception("A Descrição deve ter mais de 10 caracteres");
+        }
     }
 }

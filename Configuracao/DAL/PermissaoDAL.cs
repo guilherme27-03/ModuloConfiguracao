@@ -95,7 +95,7 @@ namespace DAL
                     {
 
                         permissao = new Permissao();
-                        permissao.Id = Convert.ToInt32(rd["ID"]);
+                        permissao.Id = Convert.ToInt32(rd["Id"]);
                         permissao.Descricao = rd["Descricao"].ToString();
 
                     }
@@ -174,6 +174,7 @@ namespace DAL
         }
 
         public void Excluir(int _id)
+        
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
