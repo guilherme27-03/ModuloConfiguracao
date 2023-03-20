@@ -40,5 +40,14 @@ namespace WindowsFormsAppPrincipal
             MessageBox.Show("Registro excluído com sucesso");
 
         }
+
+        private void ButtonAdicionarUsuario_Click(object sender, EventArgs e)
+        {
+            using(FormCadastroUsuario frm = new FormCadastroUsuario())
+            {
+                frm.ShowDialog();
+            }
+            ButtonBuscar_Click(null, null);
+        }
     }
 }

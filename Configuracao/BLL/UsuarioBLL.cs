@@ -51,7 +51,7 @@ namespace BLL
             if(usuario.Senha.Length <= 3)
                 throw new System.Exception("A senha deve ter mais de 3 caracteres");
             if (usuario.Nome.Length <= 2)
-                throw new System.Exception("O Nome deve ter mais de  caracteres");
+                throw new System.Exception("O Nome deve ter mais de 2 caracteres");
         }
     }
   
