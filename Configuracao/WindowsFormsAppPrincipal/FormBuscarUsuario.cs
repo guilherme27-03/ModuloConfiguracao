@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
+using System.Security.Cryptography;
 
 namespace WindowsFormsAppPrincipal
 {
@@ -49,5 +50,17 @@ namespace WindowsFormsAppPrincipal
             }
             ButtonBuscar_Click(null, null);
         }
+
+        private void ButtonAlterar_Click(object sender, EventArgs e)
+        {
+            int _id = ((Usuario)usuarioBindingSource.Current).Id;
+            using (FormCadastroUsuario frm = new FormCadastroUsuario(_id))
+            {
+                frm.ShowDialog();
+            }
+            ButtonBuscar_Click(null, null);
+        }
+
+
     }
 }

@@ -44,7 +44,7 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,NomeGrupo FROM GupoUsuario";
+                cmd.CommandText = "SELECT Id,NomeGrupo FROM GrupoUsuario";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cn.Open();
@@ -81,7 +81,7 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,NomeGrupo WHERE Id = @Id";
+                cmd.CommandText = "SELECT FROM GrupoUsuario Id,NomeGrupo WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cmd.CommandType = System.Data.CommandType.Text;
