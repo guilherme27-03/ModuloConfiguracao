@@ -348,6 +348,71 @@ namespace DAL
                 throw new Exception("Ocorreu um erro ao validar uma permissão", ex);
             } 
         }
+
+        public void AdicionarGrupoUsuario(int _idUsuario, int _idGrupoUsuario)
+        {
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(IdUsuario,IdGrupoUsuario) 
+                                    Values(@IdUsuario,@IdGrupoUsuario)";
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario",_idGrupoUsuario );
+                cmd.Parameters.AddWithValue("@IdgrupoUsuario", _idGrupoUsuario);
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao inserir um usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+
+        public bool UsuarioPertenceAoGrupo(int idUsuario, int IdGrupoUsuario)
+        {
+            Usuario usuario = new Usuario();
+
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT IdUsuario FROM Usuario WHERE IdUsuario = @IdUsuario AND IdGrupoUsuario = @IdGrupoUsuario";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario",idUsuario);
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", IdGrupoUsuario);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                     return true;
+                    }
+                    return false;
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar Existenciar o Grupo vinculado ao usuário" +
+                    " no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+
+    
     }
 }
                

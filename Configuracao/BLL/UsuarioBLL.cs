@@ -62,6 +62,12 @@ namespace BLL
                 throw new Exception("Você nao tem permissão para realizar essa ação");
             }
         }
+
+        public void AdicionarGrupoUsuario(int _IdUsuario, int IdGrupoUsuario)
+        {
+            if(!new UsuarioDAL().UsuarioPertenceAoGrupo(_IdUsuario,_IdUsuario))
+            new UsuarioDAL().AdicionarGrupoUsuario(_IdUsuario, IdGrupoUsuario);
+        }
     }
   
 }

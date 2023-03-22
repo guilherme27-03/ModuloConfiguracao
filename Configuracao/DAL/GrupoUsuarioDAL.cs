@@ -173,6 +173,7 @@ namespace DAL
                         grupousuario = new GrupoUsuario();
                         grupousuario.Id = Convert.ToInt32(rd["ID"]);
                         grupousuario.NomeGrupo = rd["NomeGrupo"].ToString();
+                        Grupousuarios.Add(grupousuario);
                     }
                 }
                 return Grupousuarios;

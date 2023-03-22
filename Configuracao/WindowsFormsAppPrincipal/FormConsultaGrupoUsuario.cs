@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,48 @@ namespace WindowsFormsAppPrincipal
 {
     public partial class FormConsultaGrupoUsuario : Form
     {
+        internal int Id;
+
         public FormConsultaGrupoUsuario()
         {
             InitializeComponent();
+        }
+
+        private void buttoncancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                grupoUsuarioBindingSource.DataSource = new GrupoUsuarioBLL().BuscarPorNomeGrupo(textBoxBuscar.Text);
+            }
+            catch (Exception ex)
+            {
+
+               MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonSelecionar_Click(object sender, EventArgs e)
+        {
+            try { 
+            
+                if (grupoUsuarioBindingSource.Count > 0) {
+                Id = ((GrupoUsuario)grupoUsuarioBindingSource.Current).Id;
+
+                } 
+                        else {
+                    MessageBox.Show("Não Existe registro para ser selecionado");
+                }
+            }
+            catch ( Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

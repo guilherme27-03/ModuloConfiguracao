@@ -29,7 +29,7 @@ namespace WindowsFormsAppPrincipal
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Constantes.IdUsuarioLogado = 22;
         }
 
         private void usuáriosToolStripMenuItem_Click(object sender, EventArgs e)

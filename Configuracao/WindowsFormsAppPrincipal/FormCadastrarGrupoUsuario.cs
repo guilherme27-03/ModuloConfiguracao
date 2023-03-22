@@ -47,5 +47,7 @@ namespace WindowsFormsAppPrincipal
                 grupoUsuarioBindingSource.AddNew();
             }
         }
+
+    
     }
 }
