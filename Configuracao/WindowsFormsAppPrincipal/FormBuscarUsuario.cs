@@ -61,6 +61,9 @@ namespace WindowsFormsAppPrincipal
             ButtonBuscar_Click(null, null);
         }
 
+        private void ButtonAdicionarGrupoUsuario_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

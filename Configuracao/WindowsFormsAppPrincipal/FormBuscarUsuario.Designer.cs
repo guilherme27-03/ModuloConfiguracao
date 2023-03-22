@@ -230,6 +230,7 @@
             this.ButtonAdicionarGrupoUsuario.TabIndex = 4;
             this.ButtonAdicionarGrupoUsuario.Text = "Adicionar";
             this.ButtonAdicionarGrupoUsuario.UseVisualStyleBackColor = true;
+            this.ButtonAdicionarGrupoUsuario.Click += new System.EventHandler(this.ButtonAdicionarGrupoUsuario_Click);
             // 
             // FormBuscarUsuario
             // 

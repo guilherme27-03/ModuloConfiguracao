@@ -67,5 +67,15 @@ namespace WindowsFormsAppPrincipal
         {
 
         }
+
+        private void BotãoExcluir_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BotãoAdicionar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

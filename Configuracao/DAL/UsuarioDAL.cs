@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,6 +67,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
                     }
                 }
@@ -108,6 +110,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
                     }
                 }
@@ -154,6 +157,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
                     }
                 }
@@ -177,7 +181,8 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha FROM Usuario WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha FROM Usuario WHERE Id = @Id" ;
+                                  
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -196,6 +201,7 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                     }
                 }
                 return usuario;
@@ -209,6 +215,8 @@ namespace DAL
                 cn.Close();
             }
         }
+
+        
         public Usuario BuscarPorCpf(string _cpf)
         {
             Usuario usuario = new Usuario();
@@ -238,7 +246,8 @@ namespace DAL
                         usuario.Email = rd["Email"].ToString();
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
-                        usuario.Senha = rd["Senha"].ToString();                   
+                        usuario.Senha = rd["Senha"].ToString();
+                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                     }
                 }
 
@@ -306,6 +315,45 @@ namespace DAL
                 cn.Close();
             }
         }
+
+        public bool ValidarPermissao(int _IdUsuario, int _IdPermissao)
+        {
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = " @SELECT 1 FROM PermissaoGrupoUsuario" +
+                    "INNER JOIN UsuarioGrupoUsuario on PermissaoGrupoUsuario.IdGrupoUsuario = UsuarioGrupoUsuario.IdGrupoUsuario" +
+                    "WHERE UsuarioGrupoUsuario.IdUsuario = @IdUsuario and PermissaoGrupoUsuario.IdPermissao = @IdPermissao";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario", _IdUsuario);
+                cmd.Parameters.AddWithValue("@IdPermissao", _IdPermissao);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+
+                        return true;
+
+                }
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao validar uma permissão", ex);
+            } 
+        }
     }
-  }
+}
+               
+         
+           
+     
+    
+
 

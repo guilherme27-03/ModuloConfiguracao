@@ -42,7 +42,10 @@ namespace WindowsFormsAppPrincipal
 
         private void FormCadastrarGrupoUsuario_Load(object sender, EventArgs e)
         {
-
+            if (id == 0)
+            {
+                grupoUsuarioBindingSource.AddNew();
+            }
         }
     }
 }

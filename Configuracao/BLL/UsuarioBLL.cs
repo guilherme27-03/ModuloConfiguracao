@@ -3,6 +3,7 @@ using DAL;
 using System.CodeDom;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System;
 
 namespace BLL
 {
@@ -52,6 +53,14 @@ namespace BLL
                 throw new System.Exception("A senha deve ter mais de 3 caracteres");
             if (usuario.Nome.Length <= 2)
                 throw new System.Exception("O Nome deve ter mais de 2 caracteres");
+        }
+
+        public void ValidarPermissao(int _IdPermissao)
+        {
+            if (! new UsuarioDAL().ValidarPermissao(Constantes.IdUsuarioLogado,_IdPermissao))
+            {
+                throw new Exception("Você nao tem permissão para realizar essa ação");
+            }
         }
     }
   
