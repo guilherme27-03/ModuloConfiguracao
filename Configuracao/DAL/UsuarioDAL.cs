@@ -357,7 +357,6 @@ namespace DAL
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(IdUsuario,IdGrupoUsuario) 
                                     Values(@IdUsuario,@IdGrupoUsuario)";
-
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@IdUsuario",_idGrupoUsuario );
                 cmd.Parameters.AddWithValue("@IdgrupoUsuario", _idGrupoUsuario);
@@ -412,7 +411,30 @@ namespace DAL
             }
         }
 
-    
+        public void RemoverGrupoUsuario(int idUsuario, int idGrupoUsuario)
+        {
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = @"DELETE FROM UsuarioGrupoUsuario WHERE IDUsuario = @IdUsuario
+                                   AND IdGrupoUsuario = @IdGrupoUsuario";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", idGrupoUsuario);
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ocorreu um erro ao Excluir um usuário no banco de dados", ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
     }
 }
                

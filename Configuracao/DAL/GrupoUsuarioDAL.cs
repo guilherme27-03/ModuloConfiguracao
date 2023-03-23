@@ -45,7 +45,6 @@ namespace DAL
                 cmd.Connection = cn;
                 cmd.CommandText = "SELECT Id,NomeGrupo FROM GrupoUsuario";
                 cmd.CommandType = System.Data.CommandType.Text;
-
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
@@ -55,8 +54,6 @@ namespace DAL
                         grupousuario = new GrupoUsuario();
                         grupousuario.Id = Convert.ToInt32(rd["ID"]);
                         grupousuario.NomeGrupo = rd["NomeGrupo"].ToString();
-
-
                         grupousuarios.Add(grupousuario);
                     }
                 }
@@ -199,15 +196,15 @@ namespace DAL
                 cn.Close();
             }
         }
-        public void Excluir(int _id)
+        public void Excluir(int _idGrupoUsuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @" DELETE FROM GrupoUsuario WHERE ID = @Id";
+                cmd.CommandText = @" DELETE FROM GrupoUsuario WHERE IdGrupoUsuario = @IdGrupoUsuario";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", _id);
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", _idGrupoUsuario);
                 cmd.Connection = cn;
                 cn.Open();
                 cmd.ExecuteNonQuery();

@@ -171,6 +171,7 @@
             this.textBoxConfirmarSenha.Name = "textBoxConfirmarSenha";
             this.textBoxConfirmarSenha.Size = new System.Drawing.Size(132, 22);
             this.textBoxConfirmarSenha.TabIndex = 12;
+            this.textBoxConfirmarSenha.TextChanged += new System.EventHandler(this.textBoxConfirmarSenha_TextChanged);
             // 
             // label2
             // 

@@ -15,6 +15,8 @@ namespace WindowsFormsAppPrincipal
 {
     public partial class FormBuscarUsuario : Form
     {
+        private int id;
+
         public FormBuscarUsuario()
         {
             InitializeComponent();
@@ -76,6 +78,21 @@ namespace WindowsFormsAppPrincipal
                 }
             }
 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcluirGrupoUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int IdGrupoUsuario = ((GrupoUsuario)grupoUsuariosBindingSource.Current).Id;
+                int IdUsuario = ((Usuario)usuarioBindingSource.Current).Id;
+                new UsuarioBLL().RemoverGrupoUsuario(IdUsuario, IdGrupoUsuario);
+                grupoUsuariosBindingSource.RemoveCurrent();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

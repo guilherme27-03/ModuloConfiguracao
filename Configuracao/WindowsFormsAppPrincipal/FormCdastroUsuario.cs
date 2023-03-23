@@ -52,5 +52,10 @@ namespace WindowsFormsAppPrincipal
         {
             Close();
         }
+
+        private void textBoxConfirmarSenha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
