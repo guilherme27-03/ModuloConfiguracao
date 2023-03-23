@@ -2,7 +2,6 @@
 using Models;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
 namespace BLL
 {
     public class GrupoUsuarioBLL
@@ -32,14 +31,12 @@ namespace BLL
         public void Alterar(GrupoUsuario _grupousuario)
         {
             ValidarDados(_grupousuario);
-
             new GrupoUsuarioDAL().Alterar(_grupousuario);
         }
         private void ValidarDados(GrupoUsuario _grupousuario)
         {
             if (_grupousuario.NomeGrupo.Length < 3)
                 throw new System.Exception("O nome do grupo deve ter mais de 3 caracteres");
-
         }
     }
 }

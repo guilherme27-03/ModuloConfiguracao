@@ -7,26 +7,23 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
 namespace DAL
 {
     public class GrupoUsuarioDAL
     {
         public void Inserir(GrupoUsuario _grupoUsuario)
+
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandText = @"INSERT INTO GrupoUsuario(NomeGrupo) Values(@NomeGrupo)";
-
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@NomeGrupo", _grupoUsuario.NomeGrupo);
-
                 cmd.Connection = cn;
                 cn.Open();
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -74,7 +71,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public GrupoUsuario BuscarPorId(int id)
         {
             GrupoUsuario grupousuario = new GrupoUsuario();
@@ -110,7 +106,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public List<GrupoUsuario> BuscarPorIdUsuario(int _idUsuario)
         {
             List<GrupoUsuario> Grupousuarios = new List<GrupoUsuario>();
@@ -149,8 +144,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
-
         public List<GrupoUsuario> BuscarPorNomeGrupo(string _NomeGrupo)
         {
             List<GrupoUsuario> Grupousuarios = new List<GrupoUsuario>();
@@ -163,9 +156,7 @@ namespace DAL
                 cmd.CommandText = "SELECT Id,NomeGrupo FROM GrupoUsuario WHERE NomeGrupo LIKE @NomeGrupo";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@NomeGrupo", "%" + _NomeGrupo + "%");
-
                 cn.Open();
-
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
@@ -193,12 +184,10 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE INTO GrupoUsuario(Id,NomeGrupo,) Values(@Id , @NomeGrupo";
-
+                cmd.CommandText = @"UPDATE INTO GrupoUsuario(Id,NomeGrupo,) Values(@Id , @NomeGrupo)";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Nome", _grupoUsuario.Id);
+                cmd.Parameters.AddWithValue("@Id", _grupoUsuario.Id);
                 cmd.Parameters.AddWithValue("@NomeUsuario", _grupoUsuario.NomeGrupo);
-
                 cmd.Connection = cn;
             }
             catch (Exception ex)
@@ -217,11 +206,11 @@ namespace DAL
             {
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandText = @" DELETE FROM GrupoUsuario WHERE ID = @Id";
-
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@Id", _id);
-
                 cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

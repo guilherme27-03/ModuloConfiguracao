@@ -57,5 +57,10 @@ namespace WindowsFormsAppPrincipal
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void FormConsultaGrupoUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -42,7 +42,7 @@
             this.nomeUsuarioTextBox = new System.Windows.Forms.TextBox();
             this.senhaTextBox = new System.Windows.Forms.TextBox();
             this.ativoCheckBox = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxConfirmarSenha = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonSalvar = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
@@ -100,6 +100,15 @@
             senhaLabel.TabIndex = 8;
             senhaLabel.Text = "Senha";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(401, 118);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(104, 16);
+            label1.TabIndex = 13;
+            label1.Text = "Confirmar senha";
+            // 
             // usuarioBindingSource
             // 
             this.usuarioBindingSource.DataSource = typeof(Models.Usuario);
@@ -155,22 +164,13 @@
             this.ativoCheckBox.Text = "Ativo";
             this.ativoCheckBox.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBoxConfirmarSenha
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "CPF", true));
-            this.textBox1.Location = new System.Drawing.Point(404, 139);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 22);
-            this.textBox1.TabIndex = 12;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(401, 118);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(104, 16);
-            label1.TabIndex = 13;
-            label1.Text = "Confirmar senha";
+            this.textBoxConfirmarSenha.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "CPF", true));
+            this.textBoxConfirmarSenha.Location = new System.Drawing.Point(404, 139);
+            this.textBoxConfirmarSenha.Name = "textBoxConfirmarSenha";
+            this.textBoxConfirmarSenha.Size = new System.Drawing.Size(132, 22);
+            this.textBoxConfirmarSenha.TabIndex = 12;
             // 
             // label2
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.buttonSalvar);
             this.Controls.Add(this.label2);
             this.Controls.Add(label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxConfirmarSenha);
             this.Controls.Add(this.ativoCheckBox);
             this.Controls.Add(senhaLabel);
             this.Controls.Add(this.senhaTextBox);
@@ -249,7 +249,7 @@
         private System.Windows.Forms.TextBox nomeUsuarioTextBox;
         private System.Windows.Forms.TextBox senhaTextBox;
         private System.Windows.Forms.CheckBox ativoCheckBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxConfirmarSenha;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonSalvar;
         private System.Windows.Forms.Button buttonCancelar;

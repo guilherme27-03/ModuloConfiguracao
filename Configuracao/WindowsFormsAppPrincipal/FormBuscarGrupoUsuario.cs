@@ -18,27 +18,19 @@ namespace WindowsFormsAppPrincipal
         {
             InitializeComponent();
         }
-
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
             grupoUsuarioBindingSource.DataSource = new GrupoUsuarioBLL().BuscarTodos();
         }
-
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
-            if (grupoUsuarioBindingSource.Count <= 0)
+            int _id = ((GrupoUsuario)grupoUsuarioBindingSource.Current).Id;
+            using (FormCadastrarGrupoUsuario frm = new FormCadastrarGrupoUsuario(_id))
             {
-                MessageBox.Show("Não existe registro para ser excluido");
-                return;
+                frm.ShowDialog();
             }
-            if (MessageBox.Show("Deseja mesmo excluir esse registro?", "Atenção", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            int id = ((Usuario)grupoUsuarioBindingSource.Current).Id;
-            new UsuarioBLL().Excluir(id);
-            grupoUsuarioBindingSource.RemoveCurrent();
-            MessageBox.Show("Registro excluído com sucesso");
+            buttonBuscar_Click(null, null);
         }
-
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
             using (FormCadastrarGrupoUsuario frm = new FormCadastrarGrupoUsuario())
@@ -47,7 +39,6 @@ namespace WindowsFormsAppPrincipal
             }
             buttonBuscar_Click(null, null);
         }
-
         private void buttonExcluir_Click(object sender, EventArgs e)
         {
             if (grupoUsuarioBindingSource.Count <= 0)
@@ -62,17 +53,14 @@ namespace WindowsFormsAppPrincipal
             grupoUsuarioBindingSource.RemoveCurrent();
             MessageBox.Show("Registro excluído com sucesso");
         }
-
         private void FormBuscarGrupoUsuario_Load(object sender, EventArgs e)
         {
 
         }
-
         private void BotãoExcluir_Click(object sender, EventArgs e)
         {
             
         }
-
         private void BotãoAdicionar_Click(object sender, EventArgs e)
         {
 
