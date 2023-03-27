@@ -21,12 +21,26 @@ namespace WindowsFormsAppPrincipal
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Constantes.IdUsuarioLogado = 22;
+            try
+            {
+                using(FormLogin frm = new FormLogin())
+                {
+                    frm.ShowDialog();
+                    if (!frm.logou)
+                        Application.Exit(); 
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            } 
+           
         }
 
         private void usuáriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(FormBuscarUsuario frm = new FormBuscarUsuario())
+            using (FormBuscarUsuario frm = new FormBuscarUsuario())
             {
                 frm.ShowDialog();
             }
@@ -39,6 +53,9 @@ namespace WindowsFormsAppPrincipal
                 frm.ShowDialog();
             }
         }
+      
+
+
         
     }
 }

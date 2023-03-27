@@ -137,17 +137,17 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha WHERE NomeUsuario = @NomeUsuario";
-                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = @"SELECT Id, Nome, NomeUsuario, Email, CPF, Ativo, Senha
+                                  FROM Usuario WHERE NomeUsuario LIKE @NomeUsuario";
 
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@NomeUsuario", _nomeUsuario);
+                cmd.Parameters.AddWithValue("@NomeUsuario", "%" + _nomeUsuario + "%");
 
                 cn.Open();
                 cmd.ExecuteNonQuery();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
+                    if (rd.Read())
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(rd["ID"]);
@@ -157,7 +157,6 @@ namespace DAL
                         usuario.CPF = rd["CPF"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
                         usuario.Senha = rd["Senha"].ToString();
-                        usuario.GrupoUsuarios = new GrupoUsuarioDAL().BuscarPorIdUsuario(usuario.Id);
                         usuarios.Add(usuario);
                     }
                 }

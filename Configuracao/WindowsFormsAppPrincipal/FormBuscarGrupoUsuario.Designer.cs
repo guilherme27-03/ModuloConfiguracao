@@ -66,7 +66,7 @@
             this.grupoUsuarioDataGridView.ReadOnly = true;
             this.grupoUsuarioDataGridView.RowHeadersWidth = 51;
             this.grupoUsuarioDataGridView.RowTemplate.Height = 24;
-            this.grupoUsuarioDataGridView.Size = new System.Drawing.Size(584, 255);
+            this.grupoUsuarioDataGridView.Size = new System.Drawing.Size(584, 398);
             this.grupoUsuarioDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -112,7 +112,7 @@
             this.permissoesDataGridView.ReadOnly = true;
             this.permissoesDataGridView.RowHeadersWidth = 51;
             this.permissoesDataGridView.RowTemplate.Height = 24;
-            this.permissoesDataGridView.Size = new System.Drawing.Size(295, 255);
+            this.permissoesDataGridView.Size = new System.Drawing.Size(295, 399);
             this.permissoesDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn3
