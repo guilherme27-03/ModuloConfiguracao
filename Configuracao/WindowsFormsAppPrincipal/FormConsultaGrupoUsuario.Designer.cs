@@ -95,10 +95,11 @@
             // 
             // textBoxBuscar
             // 
-            this.textBoxBuscar.Location = new System.Drawing.Point(12, 133);
+            this.textBoxBuscar.Location = new System.Drawing.Point(15, 133);
             this.textBoxBuscar.Name = "textBoxBuscar";
             this.textBoxBuscar.Size = new System.Drawing.Size(695, 22);
             this.textBoxBuscar.TabIndex = 3;
+            this.textBoxBuscar.TextChanged += new System.EventHandler(this.textBoxBuscar_TextChanged);
             // 
             // buttonSelecionar
             // 
@@ -135,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 567);
+            this.ClientSize = new System.Drawing.Size(813, 567);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxBuscar);

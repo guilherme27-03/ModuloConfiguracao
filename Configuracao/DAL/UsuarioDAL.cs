@@ -181,8 +181,8 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha FROM Usuario WHERE Id = @Id" ;
-                                  
+                cmd.CommandText = "SELECT Id,Nome,NomeUsuario,Email,CPF,Ativo,Senha FROM Usuario WHERE Id = @Id";
+
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -216,7 +216,7 @@ namespace DAL
             }
         }
 
-        
+
         public Usuario BuscarPorCpf(string _cpf)
         {
             Usuario usuario = new Usuario();
@@ -346,7 +346,7 @@ namespace DAL
             catch (Exception ex)
             {
                 throw new Exception("Ocorreu um erro ao validar uma permissão", ex);
-            } 
+            }
         }
 
         public void AdicionarGrupoUsuario(int _idUsuario, int _idGrupoUsuario)
@@ -358,7 +358,7 @@ namespace DAL
                 cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(IdUsuario,IdGrupoUsuario) 
                                     Values(@IdUsuario,@IdGrupoUsuario)";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@IdUsuario",_idGrupoUsuario );
+                cmd.Parameters.AddWithValue("@IdUsuario", _idUsuario);
                 cmd.Parameters.AddWithValue("@IdgrupoUsuario", _idGrupoUsuario);
                 cmd.Connection = cn;
                 cn.Open();
@@ -383,22 +383,22 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT IdUsuario FROM Usuario WHERE IdUsuario = @IdUsuario AND IdGrupoUsuario = @IdGrupoUsuario";
+                cmd.CommandText = "SELECT IdUsuario FROM UsuarioGrupoUsuario WHERE IdUsuario = @IdUsuario AND IdGrupoUsuario = @IdGrupoUsuario";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@IdUsuario",idUsuario);
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
                 cmd.Parameters.AddWithValue("@IdGrupoUsuario", IdGrupoUsuario);
 
                 cn.Open();
-                cmd.ExecuteNonQuery();
+
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
                     {
-                     return true;
+                        return true;
                     }
                     return false;
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -437,10 +437,10 @@ namespace DAL
         }
     }
 }
-               
-         
-           
-     
-    
+
+
+
+
+
 
 

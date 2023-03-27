@@ -61,7 +61,7 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
             this.grupoUsuarioDataGridView.DataSource = this.grupoUsuarioBindingSource;
-            this.grupoUsuarioDataGridView.Location = new System.Drawing.Point(13, 63);
+            this.grupoUsuarioDataGridView.Location = new System.Drawing.Point(12, 64);
             this.grupoUsuarioDataGridView.Name = "grupoUsuarioDataGridView";
             this.grupoUsuarioDataGridView.ReadOnly = true;
             this.grupoUsuarioDataGridView.RowHeadersWidth = 51;

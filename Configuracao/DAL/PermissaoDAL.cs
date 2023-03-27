@@ -75,33 +75,25 @@ namespace DAL
         public List<Permissao> BuscarPorDescricao(string _descricao)
         {
             List<Permissao> permissaos = new List<Permissao> { };
-            Permissao permissao = new Permissao();
+            Permissao _permissao = new Permissao();
 
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id,Descricao FROM Usuario WHERE Descricao LIKE @Descricao";
-                cmd.Parameters.AddWithValue("@Descricao", "%" + _descricao + "%");
-
+                cmd.CommandText = "SELECT Id,Descricao FROM Permissao WHERE Descricao LIKE @Descricao";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Descricao", _descricao);
-
+                cmd.Parameters.AddWithValue("@Descricao", "%" + _descricao + "%");
                 cn.Open();
-
                 using (SqlDataReader rd = cmd.ExecuteReader())
-
                     while (rd.Read())
                     {
-
-                        permissao = new Permissao();
-                        permissao.Id = Convert.ToInt32(rd["Id"]);
-                        permissao.Descricao = rd["Descricao"].ToString();
-
+                        _permissao = new Permissao();
+                        _permissao.Id = Convert.ToInt32(rd["Id"]);
+                        _permissao.Descricao = rd["Descricao"].ToString();
                     }
                 return permissaos;
-
             }
             catch (Exception ex)
             {
@@ -111,7 +103,6 @@ namespace DAL
             {
                 cn.Close();
             }
-
         }
         public Permissao BuscarPorId(int _id)
         {

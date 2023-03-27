@@ -67,7 +67,7 @@ namespace BLL
         }
         public void AdicionarGrupoUsuario(int _IdUsuario, int IdGrupoUsuario)
         {
-            if (!new UsuarioDAL().UsuarioPertenceAoGrupo(_IdUsuario, _IdUsuario))
+            if (!new UsuarioDAL().UsuarioPertenceAoGrupo(_IdUsuario, IdGrupoUsuario))
                 new UsuarioDAL().AdicionarGrupoUsuario(_IdUsuario, IdGrupoUsuario);
         }
 

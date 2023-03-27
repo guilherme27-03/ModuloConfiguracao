@@ -12,25 +12,25 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAppPrincipal
 {
-    public partial class FormConsultaGrupoUsuario : Form
+ 
+    public partial class FormConsultarpermissoes : Form
     {
         internal int Id;
-
-        public FormConsultaGrupoUsuario()
+        public FormConsultarpermissoes()
         {
             InitializeComponent();
         }
 
-        private void buttoncancelar_Click(object sender, EventArgs e)
+        private void FormConsultarpermissoes_Load(object sender, EventArgs e)
         {
-            Close();
+
         }
 
-        private void buttonBuscar_Click(object sender, EventArgs e)
+        private void buttonBuscarper_Click(object sender, EventArgs e)
         {
             try
             {
-                grupoUsuarioBindingSource.DataSource = new GrupoUsuarioBLL().BuscarPorNomeGrupo(textBoxBuscar.Text);
+                permissaoBindingSource.DataSource = new PermmissaoBLL().BuscarPorDescricao(descricaoTextBox.Text);
             }
             catch (Exception ex)
             {
@@ -39,14 +39,19 @@ namespace WindowsFormsAppPrincipal
             }
         }
 
+        private void buttoncancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void buttonSelecionar_Click(object sender, EventArgs e)
         {
             try
             {
 
-                if (grupoUsuarioBindingSource.Count > 0)
+                if (permissaoBindingSource.Count > 0)
                 {
-                    Id = ((GrupoUsuario)grupoUsuarioBindingSource.Current).Id;
+                    Id = ((Permissao)permissaoBindingSource.Current).Id;
                     Close();
                 }
                 else
@@ -59,16 +64,6 @@ namespace WindowsFormsAppPrincipal
 
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void FormConsultaGrupoUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxBuscar_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

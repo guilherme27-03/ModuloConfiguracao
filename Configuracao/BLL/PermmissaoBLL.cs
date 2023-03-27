@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -27,9 +28,9 @@ namespace BLL
         {
             return new PermissaoDAL().BuscarPorId(id);
         }
-        public void BuscarPorDescricao(string _descricao)
+        public List<Permissao> BuscarPorDescricao(string _descricao)
         {
-            new PermissaoDAL().BuscarPorDescricao(_descricao);
+            return new PermissaoDAL().BuscarPorDescricao(_descricao);
         }
         public void Alterar(Permissao permissao)
         {
@@ -39,8 +40,8 @@ namespace BLL
         }
         private void ValidarDados2(Permissao permissao)
         {
-            if (permissao.Descricao.Length <= 10)
-                throw new System.Exception("A Descrição deve ter mais de 10 caracteres");
+            if (permissao.Descricao.Length <= 3)
+                throw new System.Exception("A Descrição deve ter mais de 3 caracteres");
         }
     }
 }
