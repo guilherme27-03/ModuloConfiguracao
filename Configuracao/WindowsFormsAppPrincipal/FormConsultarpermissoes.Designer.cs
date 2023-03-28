@@ -68,7 +68,7 @@
             this.buttonSelecionar.Name = "buttonSelecionar";
             this.buttonSelecionar.Size = new System.Drawing.Size(94, 32);
             this.buttonSelecionar.TabIndex = 6;
-            this.buttonSelecionar.Text = "Selecionar";
+            this.buttonSelecionar.Text = "&Selecionar";
             this.buttonSelecionar.UseVisualStyleBackColor = true;
             this.buttonSelecionar.Click += new System.EventHandler(this.buttonSelecionar_Click);
             // 
@@ -78,7 +78,7 @@
             this.buttoncancelar.Name = "buttoncancelar";
             this.buttoncancelar.Size = new System.Drawing.Size(75, 32);
             this.buttoncancelar.TabIndex = 7;
-            this.buttoncancelar.Text = "Cancelar";
+            this.buttoncancelar.Text = "&Cancelar";
             this.buttoncancelar.UseVisualStyleBackColor = true;
             this.buttoncancelar.Click += new System.EventHandler(this.buttoncancelar_Click);
             // 
@@ -88,7 +88,7 @@
             this.buttonBuscarper.Name = "buttonBuscarper";
             this.buttonBuscarper.Size = new System.Drawing.Size(75, 32);
             this.buttonBuscarper.TabIndex = 8;
-            this.buttonBuscarper.Text = "Buscar";
+            this.buttonBuscarper.Text = "&Buscar";
             this.buttonBuscarper.UseVisualStyleBackColor = true;
             this.buttonBuscarper.Click += new System.EventHandler(this.buttonBuscarper_Click);
             // 
