@@ -41,7 +41,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public List<Usuario> BuscarPorNome(string _nome)
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -84,7 +83,6 @@ namespace DAL
             }
 
         }
-
         public List<Usuario> BuscarTodos()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -215,8 +213,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
-
         public Usuario BuscarPorCpf(string _cpf)
         {
             Usuario usuario = new Usuario();
@@ -346,7 +342,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         private void RemoverTodosUsuarios(int _idUsuario, SqlTransaction _transaction)
         {
             SqlTransaction transaction = _transaction;
@@ -378,7 +373,6 @@ namespace DAL
                 }
             }
         }
-
         public bool ValidarPermissao(int _IdUsuario, int _IdPermissao)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
@@ -411,7 +405,6 @@ namespace DAL
                 throw new Exception("Ocorreu um erro ao validar uma permissão", ex);
             }
         }
-
         public void AdicionarGrupoUsuario(int _idUsuario, int _idGrupoUsuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
@@ -436,7 +429,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public bool UsuarioPertenceAoGrupo(int idUsuario, int IdGrupoUsuario)
         {
             Usuario usuario = new Usuario();
@@ -473,7 +465,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public void RemoverGrupoUsuario(int idUsuario, int idGrupoUsuario)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);

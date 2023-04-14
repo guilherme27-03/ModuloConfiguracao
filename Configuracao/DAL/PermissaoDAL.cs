@@ -67,11 +67,8 @@ namespace DAL
             finally
             {
                 cn.Close();
-
-
             }
         }
-
         public List<Permissao> BuscarPorDescricao(string _descricao)
         {
             List<Permissao> permissaos = new List<Permissao> { };
@@ -164,9 +161,7 @@ namespace DAL
                 cn.Close();
             }
         }
-
         public void Excluir(int _id)
-        
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try

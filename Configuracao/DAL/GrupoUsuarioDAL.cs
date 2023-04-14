@@ -239,9 +239,6 @@ namespace DAL
                 }
             }
         }
-
-       
-
         private void RemoverTodasPermissoes(int idGrupoUsuario, SqlTransaction _transaction)
         {
             SqlTransaction transaction = _transaction;
@@ -274,9 +271,6 @@ namespace DAL
             }
         }
     }
-
-  
-
 }
 
 
