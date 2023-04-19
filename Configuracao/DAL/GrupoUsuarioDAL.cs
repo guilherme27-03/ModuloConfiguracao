@@ -187,6 +187,8 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Id", _grupoUsuario.Id);
                 cmd.Parameters.AddWithValue("@NomeUsuario", _grupoUsuario.NomeGrupo);
                 cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                cn.Open();
             }
             catch (Exception ex)
             {
